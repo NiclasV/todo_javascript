@@ -11,7 +11,12 @@ header {
     align-items: flex-end;
 } 
 
-
+.table .thead-dark th {
+    background: #133250;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1.1em;
+}
 header p {
     font-family: 'Dancing Script', cursive;
     font-size: 1.5em;
@@ -46,6 +51,14 @@ main {
     padding: 30px;
     min-height: 55vh;
 
+}
+
+#todo-div {
+    width: 25%;
+}
+
+#list-todos {
+    //display: flex;
 }
 
 footer {
@@ -83,7 +96,7 @@ h2 {
     color: #133250;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
-    font-size: 3em;
+    font-size: 2em;
     letter-spacing: -0.02em;
 }
 
