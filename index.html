@@ -12,7 +12,6 @@
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
 
-
     <body>
         <!-- HEADER CONTENT -->
         <header>
@@ -38,19 +37,37 @@
 
             <section class="content" id="list-todos">
                 <h2>Your Todos!</h2>
+
                 <table class="table">
                     <thead class="thead-dark">
                       <tr>
                         <th scope="col">What to do</th>
                         <th scope="col">Status</th>
                         <th scope="col">Complete</th>
+                        <th scope="col">Delete</th>
                       </tr>
                     </thead>
-                    <tbody id="tbody">
+                    <tbody id="tbody-notdone">
                         <!-- THIS IS WHERE THE TODOS WILL BE SHOWN -->
                     </tbody>
                   </table>
 
+
+                  <h2>Your Completed Todos!</h2>
+                  <table class="table">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">What to do</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Complete</th>
+                          <th scope="col">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tbody-done">
+                          <!-- THIS IS WHERE THE TODOS WILL BE SHOWN -->
+                      </tbody>
+                    </table>
+  
             </section>
 
         </main>
