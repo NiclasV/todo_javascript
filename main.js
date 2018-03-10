@@ -6,7 +6,6 @@ var todos = [];
 
 /*     ELEMENTS      */
 const addBtn = document.getElementById('add-btn');
-
 const completeBtn = document.getElementById('complete-btn');
 
 //Checking if there are todos saved in localstorage, if there is, display them
@@ -33,7 +32,6 @@ function addNewTodo(newTodo) {
   console.log(todos)
 }
 
-
 //Create an click-event the addBtn
 addBtn.addEventListener('click', function(event) {
   //Preventing defaultevent with refreshing site at click
@@ -51,6 +49,7 @@ addBtn.addEventListener('click', function(event) {
 });
 
 
+
 const deleteBtn = document.getElementById('delete-btn');
 
 //Create an click-event the deleteBtn
@@ -60,6 +59,22 @@ deleteBtn.addEventListener('click', function(event) {
   event.preventDefault()
 
   console.log("this is " + this.closest('tr'));
+
+});
+
+
+const clearBtn = document.getElementById('clear-btn');
+
+//Create an click-event the deleteBtn
+clearBtn.addEventListener('click', function(event) {
+  
+ 
+
+  console.log('clearBtn Clicked!')
+
+  localStorage.clear();
+  window.location.reload()
+
 
 });
 
