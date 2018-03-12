@@ -4,21 +4,17 @@ var todo = Object();
 //Creating an array to collect the todo-objects
 var todos = [];
 
-/*     ELEMENTS      */
-const addBtn = document.getElementById('add-btn');
-
 //Checking if there are todos saved in localstorage, if there is, display them
 if (JSON.parse(localStorage.getItem("todos"))){
    todos = JSON.parse(localStorage.getItem("todos"));
    console.log(todos);
    displayTodos();
-  }
+}
 
-
-//Function for adding a new todo object
+//Function for adding a new todo-object
 function addNewTodo(newTodo) {
   var todo = {
-      todo: newTodo,
+    todoText: newTodo,
     isDone: false
   }
   //push the todo to the todos-array
@@ -29,7 +25,9 @@ function addNewTodo(newTodo) {
   console.log(todos)
 }
 
-//Create an click-event the addBtn
+//Delaring the addBtn
+const addBtn = document.getElementById('add-btn');
+//Create an click-event
 addBtn.addEventListener('click', function(event) {
   //Preventing defaultevent with refreshing site at click
   event.preventDefault()
@@ -38,55 +36,58 @@ addBtn.addEventListener('click', function(event) {
 
   console.log("the new task is\: " + newTodo)
 
-  //add the new todo
+  //Add the new todo
   addNewTodo(newTodo);
-  
-  //display updated todos
-  displayTodos();
 
   //Refresh the window
   window.location.reload()
 });
 
-
+//Declaring the DeleteBtn
 const deleteBtn = document.getElementById('delete-btn');
-
 //Create an click-event the deleteBtn
 deleteBtn.addEventListener('click', function(event) {
-  
   //Preventing defaultevent with refreshing site at click
   event.preventDefault()
 
- deleteTodo(0);
- window.location.reload()
+  //Declaring theTodoText which is the todo to delete, based on the textinput (which is the todoobjects todotext) in the first table-column
+  var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
+
+  //Gotta find the specific index of the todo to delete, i use findIndex and use the above declared variable
+  var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
+
+  deleteTodo(todoIndex); /* Deleting the todo based on the index found! */
+  window.location.reload()
 });
 
+
+//Declaring the completeBtn
 const completeBtn = document.getElementById('complete-btn');
-
-//Create an click-event the deleteBtn
+//Create an click-event the completeBtn
 completeBtn.addEventListener('click', function(event) {
-  
   //Preventing defaultevent with refreshing site at click
   event.preventDefault()
 
- completeTodo(0);
- window.location.reload()
+  //Declaring theTodoText which is the todo to complete, based on the textinput (which is the todoobjects todotext) in the first table-column
+  var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
+  //Gotta find the specific index of the todo to complete, i use findIndex and use the above declared variable
+  var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
+
+  completeTodo(todoIndex); /* Completing the todo based on the index found! */
+  window.location.reload()
 });
 
-//Add const for the clearbutton
+
+//Declaring the clearbutton
 const clearBtn = document.getElementById('clear-btn');
-
-//Create an click-event the clearBtn
+//Create an click-event
 clearBtn.addEventListener('click', function(event) {
-  
-  console.log('clearBtn Clicked!')
-
   //Clear all from localstorage
   localStorage.clear();
-
   //Refresh the window
   window.location.reload()
 });
+
 
 //Function for displaying todos in a table 
 function displayTodos() {
@@ -104,10 +105,10 @@ function displayTodos() {
       
       var status = "Not done!";
 
-      //Create each todoItem to list it in the table "list-todos"
+      //Create each todoItem to later list in the "listTodosNotDone"
       todoItem += `
       <tr>
-      <td> ${todos[i].todo}</td>
+      <td id="not-done"> ${todos[i].todoText}</td>
       <td> ${status} </td>
       <td><button type="submit" class="btn-xs btn-primary btn-success" id="complete-btn">Done!</button></td>
       <td><button type="submit" class="btn-xs btn-primary btn-danger" id="delete-btn">Delete</button></td>
@@ -116,12 +117,11 @@ function displayTodos() {
     } else {
       var status = "Done!";
 
-      //Create each todoItem to list it in the table "list-done-todo"
+      //Create each doneTodoItem to later list in the "listDoneTodos"
       doneTodoItem += `
       <tr>
-      <td> ${todos[i].todo}</td>
+      <td> ${todos[i].todoText}</td>
       <td> ${status} </td>
-      <td></td>
       <td><button type="submit" class="btn-xs btn-primary btn-danger" id="delete-btn">Delete</button></td>
       </tr>
       `
@@ -132,23 +132,18 @@ function displayTodos() {
   listDoneTodos.innerHTML = doneTodoItem;
 }
 
-
 //Function for deleting todo from the todosarray with splice
 function deleteTodo(index) {
-  
   //Splice it from todos array
   todos.splice(index, 1);
-
   //When deleted from the array, update localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 //Function for completing todo from the todosarray by updating its "isDone"-status
 function completeTodo(index) {
-  
   //Update "isDone" to true
   todos[index].isDone = true;
-
   //When status updated, update to localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
 }
