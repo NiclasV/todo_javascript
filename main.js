@@ -44,38 +44,41 @@ addBtn.addEventListener('click', function(event) {
 });
 
 //Declaring the DeleteBtn
-const deleteBtn = document.getElementById('delete-btn');
-//Create an click-event the deleteBtn
-deleteBtn.addEventListener('click', function(event) {
-  //Preventing defaultevent with refreshing site at click
-  event.preventDefault()
+const deleteBtn = document.getElementsByClassName('delete-btn');
+//Create an click-event the deleteBtn, since the ByClassName gets a HTMLcolletion array with all the buttons i gotta looop it!
+for (var i = 0 ; i < deleteBtn.length; i++) {
+  deleteBtn[i].addEventListener('click', function(event) {
+    //Preventing defaultevent with refreshing site at click
+    event.preventDefault()
 
-  //Declaring theTodoText which is the todo to delete, based on the textinput (which is the todoobjects todotext) in the first table-column
-  var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
+    //Declaring theTodoText which is the todo to delete, based on the textinput (which is the todoobjects todotext) in the first table-column
+    var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
 
-  //Gotta find the specific index of the todo to delete, i use findIndex and use the above declared variable
-  var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
+    //Gotta find the specific index of the todo to delete, i use findIndex and use the above declared variable
+    var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
 
-  deleteTodo(todoIndex); /* Deleting the todo based on the index found! */
-  window.location.reload()
-});
-
+    deleteTodo(todoIndex); /* Deleting the todo based on the index found! */
+    window.location.reload()
+  })
+};
 
 //Declaring the completeBtn
-const completeBtn = document.getElementById('complete-btn');
-//Create an click-event the completeBtn
-completeBtn.addEventListener('click', function(event) {
-  //Preventing defaultevent with refreshing site at click
-  event.preventDefault()
+const completeBtn = document.getElementsByClassName('complete-btn');
+//Create an click-event the completeBtn, since the ByClassName gets a HTMLcolletion array with all the buttons i gotta looop it!
+for (var i = 0 ; i < completeBtn.length; i++) {
+  completeBtn[i].addEventListener('click', function(event) {
+    //Preventing defaultevent with refreshing site at click
+    event.preventDefault()
 
-  //Declaring theTodoText which is the todo to complete, based on the textinput (which is the todoobjects todotext) in the first table-column
-  var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
-  //Gotta find the specific index of the todo to complete, i use findIndex and use the above declared variable
-  var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
+    //Declaring theTodoText which is the todo to complete, based on the textinput (which is the todoobjects todotext) in the first table-column
+    var theTodoText = this.parentNode.parentElement.firstElementChild.innerText; 
+    //Gotta find the specific index of the todo to complete, i use findIndex and use the above declared variable
+    var todoIndex = todos.findIndex(function(element){return element.todoText === theTodoText})
 
-  completeTodo(todoIndex); /* Completing the todo based on the index found! */
-  window.location.reload()
-});
+    completeTodo(todoIndex); /* Completing the todo based on the index found! */
+    window.location.reload()
+  })
+};
 
 
 //Declaring the clearbutton
@@ -110,8 +113,8 @@ function displayTodos() {
       <tr>
       <td id="not-done"> ${todos[i].todoText}</td>
       <td> ${status} </td>
-      <td><button type="submit" class="btn-xs btn-primary btn-success" id="complete-btn">Done!</button></td>
-      <td><button type="submit" class="btn-xs btn-primary btn-danger" id="delete-btn">Delete</button></td>
+      <td><button type="submit" class="btn-xs btn-primary btn-success complete-btn">Done!</button></td>
+      <td><button type="submit" class="btn-xs btn-primary btn-danger delete-btn">Delete</button></td>
       </tr>
       `
     } else {
@@ -122,7 +125,7 @@ function displayTodos() {
       <tr>
       <td> ${todos[i].todoText}</td>
       <td> ${status} </td>
-      <td><button type="submit" class="btn-xs btn-primary btn-danger" id="delete-btn">Delete</button></td>
+      <td><button type="submit" class="btn-xs btn-primary btn-danger delete-btn">Delete</button></td>
       </tr>
       `
     }
@@ -147,3 +150,5 @@ function completeTodo(index) {
   //When status updated, update to localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
 }
+
+console.log("hej")
