@@ -7,7 +7,6 @@ var todos = [];
 //Checking if there are todos saved in localstorage, if there is, display them
 if (JSON.parse(localStorage.getItem("todos"))){
    todos = JSON.parse(localStorage.getItem("todos"));
-   console.log(todos);
    displayTodos();
 }
 
@@ -21,8 +20,6 @@ function addNewTodo(newTodo) {
   todos.push(todo);
   //save it to localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
-  //log it just to see it worked
-  console.log(todos)
 }
 
 //Delaring the addBtn
@@ -33,12 +30,8 @@ addBtn.addEventListener('click', function(event) {
   event.preventDefault()
   //Get the value from the inputfield to the variable newTodo
   var newTodo = document.getElementById('todo-input').value
-
-  console.log("the new task is\: " + newTodo)
-
   //Add the new todo
   addNewTodo(newTodo);
-
   //Refresh the window
   window.location.reload()
 });
@@ -150,5 +143,3 @@ function completeTodo(index) {
   //When status updated, update to localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
 }
-
-console.log("hej")
