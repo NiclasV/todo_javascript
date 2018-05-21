@@ -4,6 +4,7 @@ var todo = Object();
 //Creating an array to collect the todo-objects
 var todos = [];
 
+
 //Checking if there are todos saved in localstorage, if there is, display them
 if (JSON.parse(localStorage.getItem("todos"))){
    todos = JSON.parse(localStorage.getItem("todos"));
@@ -143,3 +144,6 @@ function completeTodo(index) {
   //When status updated, update to localstorage
   localStorage.setItem("todos", JSON.stringify(todos));
 }
+
+console.log(deleteBtn);
+console.log(deleteBtn[0])
