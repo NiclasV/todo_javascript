@@ -1,10 +1,10 @@
 Examination Todo - Javascript
 
-First assignment in the Javascripot-course
-
 Author: Niclas Victorsson
 
 Frameworks: Bootstrap & SASS
+
+First assignment in the Javascript-course
 
 Saving your todos to localStorage for some actual useable functionality.
 
